@@ -1,0 +1,28 @@
+#include <iostream> 
+using namespace std; 
+int *multisolution (int firstst, int secondst, int * first, int * second) {
+	int* multi = new int(100);
+	for (int i = 0;i <= firstst; i++) {
+		for (int j = 0;j <= secondst;j++)
+			multi[i + j] += first[i] * second[j];
+	}
+	return multi;
+}
+    int *sumsolution (int firstst, int secondst, int * first, int * second) {
+		int *sum = new int(100);
+    if (firstst > secondst) {
+		for (int i = 0; i <= secondst; i++)
+			sum[i + firstst - secondst] = second[i] + first[i + firstst - secondst];
+		for (int i = 0;i < firstst - secondst; i++) sum[i] = first[i];
+	}
+	else {
+		for (int i = 0; i <= firstst; i++)
+			sum[i + secondst - firstst] = first[i] + second[i + secondst - firstst];
+		for (int i = 0;i <secondst - firstst; i++) sum[i] = second[i];
+	}
+	return sum;
+}
+int main()
+{
+	
+}
