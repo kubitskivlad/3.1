@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include <stdio.h>
+#include <math.h>
 using namespace std;
 
 int * func(int* a,int size);
@@ -30,23 +31,24 @@ int main()
 int* func(int* a, int size)
 {
     int* b = new int(3);
-    int t = 0;
-    for(int i2 = 0; i2 < size; i2++)
-    {
-        for(int j3 = 0; j3 < size; j3++)
-        {
-           if (a[j3] <= a[j3 + 1])
-           {
-               t = a[j3 + 1];
-               a[j3 + 1] = a[j3];
-               a[j3] = t;
-           }
-        }
-    }
     
-    for(int i = 0; i <= 2; i++)
+    int pro;
+    pro = a[0]*a[1]*a[2];
+    for (int i1 = 0; i1 <= size; i1++)
     {
-        b[i] = a[i];
+        for (int j2 = (i1 + 1); j2 <= size; j2++)
+        {
+            for (int e3 = (j2 + 1); e3 <= size; e3++)
+            {
+                if (a[i1]*a[j2]*a[e3] > pro)
+                {
+                    pro = a[i1]*a[j2]*a[e3];
+                    b[0] = a[i1];
+                    b[1] = a[j2];
+                    b[2] = a[e3];
+                }
+            }
+        }
     }
     return b;
 }
