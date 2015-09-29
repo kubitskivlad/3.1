@@ -12,21 +12,15 @@
 using namespace std;
 
 int * func(int* a,int size);
+void assert(int* a, int size, int* test);
 
 int main()
 {
-    int* r;
-    int* a = new int [7];
-    for(int i = 0; i <= 6; i++)
-    {
-        cout<< "vvedite chisla "<<i<<endl;
-        cin>>a[i];
-    }
-    r = func(a, 6);
-    for (int i = 0; i <= 2; i++)
-    {
-        cout<<r[i]<<endl;
-    }
+    int a[7] = { 1,2,3,4,5,6,7 }; int test[3] = { 5,6,7 };
+	assert(a, 7, test);
+	int a1[9] = { 1,2,1,2,1,2,1,2,1 }; int test1[3] = { 2,2,2 };
+	assert(a1, 9, test1);
+	return 0;
 }
 int* func(int* a, int size)
 {
@@ -51,5 +45,14 @@ int* func(int* a, int size)
         }
     }
     return b;
+}
+void assert(int* a, int size, int* test)
+{
+	int* r;
+	r = func(a, size);
+	if (r[0] * r[1] * r[2] == test[0] * test[1] * test[2]) {
+		cout << "OK" << endl;
+	}
+	else { cout << "FAIL" << endl; }
 }
 
