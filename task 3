@@ -1,28 +1,128 @@
-#include <iostream> 
-using namespace std; 
-int *multisolution (int firstst, int secondst, int * first, int * second) {
-	int* multi = new int(100);
-	for (int i = 0;i <= firstst; i++) {
-		for (int j = 0;j <= secondst;j++)
-			multi[i + j] += first[i] * second[j];
-	}
-	return multi;
-}
-    int *sumsolution (int firstst, int secondst, int * first, int * second) {
-		int *sum = new int(100);
-    if (firstst > secondst) {
-		for (int i = 0; i <= secondst; i++)
-			sum[i + firstst - secondst] = second[i] + first[i + firstst - secondst];
-		for (int i = 0;i < firstst - secondst; i++) sum[i] = first[i];
-	}
-	else {
-		for (int i = 0; i <= firstst; i++)
-			sum[i + secondst - firstst] = first[i] + second[i + secondst - firstst];
-		for (int i = 0;i <secondst - firstst; i++) sum[i] = second[i];
-	}
-	return sum;
-}
+
+#include <iostream>
+using namespace std;
+int *multisolution(int firstst, int secondst, int * first, int * second);
+void assertpro(int* a, int* b, int n, int m, int* test);
+void assertsum(int* a, int* b, int n, int m, int* test);
 int main()
 {
-	
+    int a[3] = {6,2,1};
+    int b[2] = {3,2};
+    int test[4] = {18,18,7,2};
+    int test1[3] = {6,5,3};
+    assertpro(a, b, 2, 1, test);
+    assertsum(a, b, 2, 1, test1);
+    int c[4] = {10,5,2,2};
+    int d[3] = {7,1,3};
+    int test3[6] = {70,45,49,31,8,6};
+    int test4[4] = {10,12,3,5};
+    assertpro(c, d, 3, 2, test3);
+    assertsum(c, d, 3, 2, test4);
+    int f[3] = {4,5,3};
+    int g[2] = {10,3};
+    int test5[4] = {40,62,45,9};
+    int test6[3] = {4,15,6};
+    assertpro(f, g, 2, 1, test5);
+    assertsum(f, g, 2, 1, test6);
+    int w[5] = {1,1,2,1,2};
+    int q[3] = {1,1,2};
+    int test7[7] = {1,2,5,5,7,4,4};
+    int test8[5] = {1,1,3,2,4};
+    assertpro(w, q, 4, 2, test7);
+    assertsum(w, q, 4, 2, test8);
+    int x[5] = {6,3,2,7,4};
+    int v[4] = {7,2,11,5};
+    int test9[8] = {42,33,86,116,79,95,79,20};
+    int test10[5] = {6,10,4,18,9};
+    assertpro(x, v, 4, 3, test9);
+    assertsum(x, v, 4, 3, test10);
+
+}
+int *multisolution(int firstst, int secondst, int * first, int * second)
+{
+    int* multi = new int[100];
+    for (int i = 0; i <= (firstst + secondst); i++)
+           {
+               multi[i] = 0;
+           }
+    for (int i = 0;i <= firstst; i++)
+    {
+        for (int j = 0;j <= secondst;j++)
+            multi[i + j] += first[i] * second[j];
+    }
+//    for (int i = 0; i <= (firstst + secondst); i++)
+//    {
+//        cout <<i<<" "<< multi[i]<<endl;
+//    }
+    return multi;
+}
+int *sumsolution(int firstst, int secondst, int * first, int * second) {
+    int *sum = new int[150];
+    if (firstst > secondst) {
+        for (int i = 0; i <= secondst; i++)
+            sum[i + firstst - secondst] = second[i] + first[i + firstst - secondst];
+        for (int i = 0; i < firstst - secondst; i++)
+            sum[i] = first[i];
+    }
+    else {
+        for (int i = 0; i <= firstst; i++)
+            sum[i + secondst - firstst] = first[i] + second[i + secondst - firstst];
+        for (int i = 0;i <secondst - firstst; i++)
+            sum[i] = second[i];
+    }
+//        for (int i = 0; i <= 4; i++)
+//        {
+//            cout <<i<<" "<< sum[i]<<endl;
+//        }
+    return sum;
+}
+void assertpro(int* a, int* b, int n, int m, int* test)
+{
+    int sch = 0;
+    int* r = multisolution(n, m, a ,b);
+    for (int i = 0; i <= (m + n); i++)
+    {
+        if (test[i] == r[i])
+        {
+            sch++;
+        }
+    }
+    if (sch == (n + m + 1))
+    {
+        cout <<"pro ok"<<endl;
+    }
+    else
+    {
+        cout <<"pro false "<<endl;
+    }
+}
+void assertsum(int* a, int* b, int n, int m, int* test)
+{
+    int sch = 0;
+    int g = 0;
+    int* r = sumsolution(n,m,a,b);
+    if (n > m)
+    {
+        g = n;
+    }
+    else
+    {
+        g = m;
+    }
+    for (int i = 0; i < (g + 1); i++)
+    {
+        if (test[i] == r[i])
+        {
+            sch++;
+        }
+    }
+    if (sch == (g + 1))
+    {
+        cout <<"sum ok"<<endl;
+    }
+    else
+    {
+        cout <<"sum false "<<endl;
+    }
+}
 }
